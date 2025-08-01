@@ -22,7 +22,7 @@ public class ReservationService {
     @Autowired
     private UserService userService;
 
-    public Reservation saveReservation(NewReservationDTO payload) {
+    public Reservation saveReservation(NewReservationDTO payload, User user) {
 
         User u = userService.findUserById(payload.userId());
 

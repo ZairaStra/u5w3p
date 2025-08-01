@@ -6,7 +6,12 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import zairastra.u5w3p.entities.enums.Role;
+
+import java.util.Collection;
+import java.util.List;
 
 @JsonIgnoreProperties({"password", "authorities", "enabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked"})
 @Entity
@@ -43,5 +48,7 @@ public class User {
         this.password = password;
     }
 
-    //TODO: lista di stringhe da enum - UserDetails
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.role.name()));
+    }
 }

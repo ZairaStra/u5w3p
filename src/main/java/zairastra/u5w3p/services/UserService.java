@@ -29,9 +29,16 @@ public class UserService {
             throw new BadRequestException("A user with username " + payload.username() + " already exists in our system");
         });
 
+        Role role;
+        try {
+            role = Role.valueOf(payload.role().toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            throw new BadRequestException("Invalid role: " + payload.role() + "; insert SIMPLE_USER or EVENT_PLANNER");
+        }
+
         User newUser = new User(payload.name(), payload.surname(), payload.username(), payload.email(), bCrypt.encode(payload.password()));
 
-        newUser.setRole(Role.SIMPLE_USER);
+        newUser.setRole(role);
 
         User savedUser = usersRepository.save(newUser);
         log.info("The user " + payload.name() + " " + payload.surname() + " has been saved");

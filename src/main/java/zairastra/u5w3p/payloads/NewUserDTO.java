@@ -17,5 +17,7 @@ public record NewUserDTO(
         String email,
         @NotEmpty(message = "Password is required")
         @Size(min = 6)
-        String password) {
+        String password,
+        @NotEmpty(message = "Role is required")
+        String role) {
 }

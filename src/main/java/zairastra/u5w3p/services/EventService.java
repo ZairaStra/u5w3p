@@ -28,7 +28,7 @@ public class EventService {
     UserService userService;
 
     //metodi per creare, modificare, eliminare - solo organizzatori, solo lo stesso organizzatore
-    public Event saveEvent(NewEventDTO payload) {
+    public Event saveEvent(NewEventDTO payload, User user) {
         eventsRepository.findByDateAndTitleIgnoreCaseAndPlaceIgnoreCase(payload.date(), payload.title(), payload.place()).ifPresent(event -> {
             throw new BadRequestException("An event named " + payload.title() + " in " + payload.place() + " on " + payload.date() + " is already scheduled");
         });
