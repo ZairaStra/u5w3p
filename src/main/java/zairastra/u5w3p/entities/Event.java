@@ -1,6 +1,7 @@
 package zairastra.u5w3p.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -28,7 +29,7 @@ public class Event {
     private LocalDate date;
     @NotEmpty(message = "A place for the event is required")
     private String place;
-
+    @Min(value = 2, message = "To create an event, a minimum number of two participants must be expected")
     private int maxNumbParticipant;
 
     @NotNull(message = "Please insert a valid EventPlanner")
