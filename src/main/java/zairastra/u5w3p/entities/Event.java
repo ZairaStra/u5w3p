@@ -19,7 +19,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id", nullable = false)
     @Setter(AccessLevel.NONE)
-    private int id;
+    private Long id;
     @NotEmpty(message = "The event must have a name")
     private String title;
 
